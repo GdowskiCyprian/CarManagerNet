@@ -18,8 +18,7 @@ public class CarDataService
 
     public IEnumerable<Car> GetCarsFromDb()
     {
-        //_mySqlProvider.ExecuteQuery(out DataTable table, "Car_GetAll");
-        _mySqlProvider.ExecuteCustomQuery(out DataTable table, "Select * from car");
+        _mySqlProvider.ExecuteQuery(out DataTable table, "carmanager.car.getAll");
         foreach (DataRow row in table.Rows)
         {
             yield return RowToModelCar(row);
