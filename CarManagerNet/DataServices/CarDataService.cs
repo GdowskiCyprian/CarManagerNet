@@ -36,7 +36,7 @@ public class CarDataService
         _mySqlProvider.AddSqlParameter("Displacement", car.Displacement, MySqlDbType.Int32, ParameterDirection.Input);
         _mySqlProvider.AddSqlParameter("Power", car.Power, MySqlDbType.Int32, ParameterDirection.Input);
         _mySqlProvider.AddSqlParameter("Mileage", car.Mileage, MySqlDbType.Int32, ParameterDirection.Input);
-        _mySqlProvider.AddSqlParameter("ClientId", car.ClientId, MySqlDbType.Int32, ParameterDirection.Input);
+        //_mySqlProvider.AddSqlParameter("ClientId", car.Client.ClientId, MySqlDbType.Int32, ParameterDirection.Input);
         _mySqlProvider.ExecuteNonQuery("carmanager.car.postCar");
     }
 
@@ -52,8 +52,8 @@ public class CarDataService
             Version = row.GetValueAsString("Version"),
             Displacement = row.GetValueAsInt("Displacement"),
             Power = row.GetValueAsInt("Power"),
-            Mileage = row.GetValueAsInt("Mileage"),
-            ClientId = row.GetValueAsInt("ClientId")
+            Mileage = row.GetValueAsInt("Mileage")
+            //Client.ClientId = row.GetValueAsInt("ClientId")
         };
 
     #endregion

@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CarManagerNet.Models;
 
 public class Car
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int CarId { get; set; }
     public int MakeYear { get; set; }
     public string Manufacturer { get; set; }
@@ -10,6 +15,6 @@ public class Car
     public int Displacement { get; set; }
     public int Power { get; set; }
     public int Mileage { get; set; }
-    
-    public int ClientId { get; set; }
+    [ForeignKey("ClientId")]
+    public virtual Client Client { get; set; }
 }

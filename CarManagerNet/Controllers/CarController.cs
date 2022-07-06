@@ -1,4 +1,5 @@
 using CarManagerNet.DataServices;
+using CarManagerNet.Helpers;
 using CarManagerNet.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,24 +10,25 @@ namespace CarManagerNet.Controllers;
 public class CarController
 {
     private readonly CarDataService _dataService;
+    private DataContext _dataContext;
 
-
-    public CarController()
+    public CarController(DataContext context)
     {
         _dataService = new CarDataService();
+        _dataContext = context;
     }
 
     [HttpGet]
     [Route("GetCars")]
     public IEnumerable<Car> GetCars()
     {
-        return _dataService.GetCarsFromDb();
+        return _dataContext.Cars;
     }
     [HttpPost]
     [Route("PostCar")]
     public void PostCar([FromBody]Car car)
     {
-        _dataService.SaveCarToDb(car);
+        _dataContext.Add(car);
     }
 }
 
