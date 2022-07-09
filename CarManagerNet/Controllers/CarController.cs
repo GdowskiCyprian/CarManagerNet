@@ -9,6 +9,11 @@ namespace CarManagerNet.Controllers;
 [Route("[controller]")]
 public class CarController
 {
+    //todo postCar
+    //todo deleteCar
+    //todo getCarsByClientId
+    //todo updateCar
+    
     private DataContext _dataContext;
     public CarController(DataContext context)
     {
@@ -24,9 +29,9 @@ public class CarController
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Car))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Car>> GetCarById(int id)
+    public async Task<Car> GetCarById(int id)
     {
-        return await _dataContext.Cars.FindAsync(id) ?? throw new NotImplementedException();
+        return await _dataContext.Cars.FindAsync(id);
     }
     [HttpPost]
     public async void PostCar([FromBody]Car car)
