@@ -14,7 +14,7 @@ builder.Services.AddDbContext<DataContext>(options =>
         UserID = "Savadrox",
         Password = "Plokiploki1!",
         SslMode = MySqlSslMode.Required,
-        SslCa = "DigiCertGlobalRootCA.crt.pem"
+        SslCert = "DigiCertGlobalRootCA.crt.pem"
     };
     options.UseMySql(connection.ConnectionString, ServerVersion.AutoDetect(connection.ConnectionString));
 });

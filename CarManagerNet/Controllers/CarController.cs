@@ -1,7 +1,7 @@
-using CarManagerNet.DataServices;
 using CarManagerNet.Helpers;
 using CarManagerNet.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarManagerNet.Controllers;
 
@@ -9,26 +9,30 @@ namespace CarManagerNet.Controllers;
 [Route("[controller]")]
 public class CarController
 {
-    private readonly CarDataService _dataService;
     private DataContext _dataContext;
-
     public CarController(DataContext context)
     {
-        _dataService = new CarDataService();
         _dataContext = context;
     }
 
     [HttpGet]
-    [Route("GetCars")]
-    public IEnumerable<Car> GetCars()
+    public async Task<List<Car>> GetCars()
     {
-        return _dataContext.Cars;
+        return await _dataContext.Cars.ToListAsync();
+    }
+    
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Car))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<Car>> GetCarById(int id)
+    {
+        return await _dataContext.Cars.FindAsync(id) ?? throw new NotImplementedException();
     }
     [HttpPost]
-    [Route("PostCar")]
-    public void PostCar([FromBody]Car car)
+    public async void PostCar([FromBody]Car car)
     {
-        _dataContext.Add(car);
+        await _dataContext.Cars.AddAsync(car);
+        await _dataContext.SaveChangesAsync();
     }
 }
 

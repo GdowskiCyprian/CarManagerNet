@@ -11,8 +11,8 @@ public class Client
     public int PhoneNumber { get; set; }
     public string Name { get; set; }
     public string Surname { get; set; }
-    
-    public int RepairShopId { get; set; }
-    
-    public int AuthId { get; set; }
+    [ForeignKey("RepairShopId")]
+    public virtual RepairShop RepairShop { get; set; }
+    [ForeignKey("AuthId")]
+    public virtual Auth Auth { get; set; }
 }
