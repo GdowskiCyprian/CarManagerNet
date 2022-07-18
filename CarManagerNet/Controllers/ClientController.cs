@@ -20,8 +20,7 @@ public class ClientController
         return await _dataContext.Clients.Where(x => x.RepairShop.RepairShopId == repairShopId).ToListAsync();
     }
     //done GetClientByMail
-    [HttpGet("{eMail}")]
-    [Route("GetByMail")]
+    [HttpGet("getClientByMail/{eMail}")]
     public Client GetClientByMail(string eMail)
     {
         return _dataContext.Clients.First(x => x.Auth.Email == eMail);
@@ -33,5 +32,11 @@ public class ClientController
         _dataContext.Clients.RemoveRange(_dataContext.Clients.Where(x => x.ClientId == clientId));
         _dataContext.SaveChanges();
     }
-    
+    //done PostClient
+    [HttpPost]
+    public void PostClient([FromBody] Client client)
+    {
+        _dataContext.Clients.Add(client);
+        _dataContext.SaveChanges();
+    }
 }

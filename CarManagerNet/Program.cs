@@ -42,3 +42,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//todo fix warning in models
+//todo JSON serialization blocking
+//todo JWT token authorization

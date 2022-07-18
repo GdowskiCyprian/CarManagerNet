@@ -3,7 +3,8 @@ using CarManagerNet.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarManagerNet.Controllers;
-
+[ApiController]
+[Route("[controller]")]
 public class FuelTankController
 {
     private readonly DataContext _dataContext;

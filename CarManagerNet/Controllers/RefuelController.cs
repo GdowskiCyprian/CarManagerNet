@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarManagerNet.Controllers;
-
+[ApiController]
+[Route("[controller]")]
 public class RefuelController
 {
-    private DataContext _dataContext;
+    private readonly DataContext _dataContext;
 
     public RefuelController(DataContext context)
     {
