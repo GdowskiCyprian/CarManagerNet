@@ -29,7 +29,7 @@ public class RepairController
         _dataContext.SaveChanges();
     }
     //done GetRepairsByRepairShopId
-    [HttpGet("getRepairsByClientId/{repairShopId:int}")]
+    [HttpGet("getRepairsByRepairShopId/{repairShopId:int}")]
     public async Task<List<Repair>> GetRepairsByRepairShopId(int repairShopId)
     {
         return await _dataContext.Repairs.Where(x => x.Car.Client.RepairShop.RepairShopId == repairShopId).ToListAsync();

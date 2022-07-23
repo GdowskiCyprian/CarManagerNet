@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CarManagerNet.Models;
 
@@ -15,6 +16,7 @@ public class Car
     public int Displacement { get; set; }
     public int Power { get; set; }
     public int Mileage { get; set; }
+    
     [ForeignKey("ClientId")]
     public virtual Client Client { get; set; }
 }

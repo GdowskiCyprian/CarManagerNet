@@ -9,12 +9,10 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     var connection = new MySqlConnectionStringBuilder
     {
-        Server = "carmanagerdatabase.mysql.database.azure.com",
+        Server = "localhost",
         Database = "carmanager",
-        UserID = "Savadrox",
-        Password = "Plokiploki1!",
-        SslMode = MySqlSslMode.Required,
-        SslCert = "DigiCertGlobalRootCA.crt.pem"
+        UserID = "root",
+        Password = "Plokiploki1"
     };
     options.UseMySql(connection.ConnectionString, ServerVersion.AutoDetect(connection.ConnectionString));
 });
