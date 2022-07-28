@@ -32,7 +32,9 @@ public class RefuelController
     [HttpGet("{repairShopId:int}")]
     public async Task<List<Refuel>> GetRefuelsByRepairShopId(int repairShopId)
     {
-        return await _dataContext.Refuels.Where(x => x.FuelTank.Car.Client.RepairShop.RepairShopId == repairShopId)
+        return await _dataContext.Refuels
+            .Where(x => x.FuelTank.Car.Client.RepairShop.RepairShopId == repairShopId)
+            .Include(x=>x.FuelTank)
             .ToListAsync();
     }
 }

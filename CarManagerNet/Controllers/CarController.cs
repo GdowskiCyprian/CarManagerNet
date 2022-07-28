@@ -30,13 +30,10 @@ public class CarController
      }
      //done getCarsByClientId
      [HttpGet("{clientId:int}")]
-     public List<Car> GetCarsByClientId(int clientId)
+     public Task<List<Car>> GetCarsByClientId(int clientId)
      {
-         List<Car> list = new List<Car>();
-         list.AddRange(_dataContext.Cars.Where(x => x.Client.ClientId == clientId).Include(car => car.Client.RepairShop.Auth).Include(car => car.Client.Auth));
-        
-
-         return list; }
+         return _dataContext.Cars.Where(x => x.Client.ClientId == clientId).Include(x => x.Client).ToListAsync();
+     }
      //done updateCar
      [HttpPut]
      public void UpdateCar([FromBody] Car car)

@@ -17,13 +17,13 @@ public class ClientController
     [HttpGet("{repairShopId:int}")]
     public async Task<List<Client>> GetClientsByRepairShopId(int repairShopId)
     {
-        return await _dataContext.Clients.Where(x => x.RepairShop.RepairShopId == repairShopId).ToListAsync();
+        return await _dataContext.Clients.Include(x=>x.Auth).Where(x => x.RepairShop.RepairShopId == repairShopId).ToListAsync();
     }
     //done GetClientByMail
     [HttpGet("getClientByMail/{eMail}")]
     public Client GetClientByMail(string eMail)
     {
-        return _dataContext.Clients.First(x => x.Auth.Email == eMail);
+        return _dataContext.Clients.Include(x=>x.Auth).First(x => x.Auth.Email == eMail);
     }
     //done DeleteClient
     [HttpDelete("{clientId:int}")]

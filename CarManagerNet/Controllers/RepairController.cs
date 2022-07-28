@@ -38,6 +38,9 @@ public class RepairController
     [HttpGet("getRepairsByClientId/{clientId:int}")]
     public async Task<List<Repair>> GetRepairsByClientId(int clientId)
     {
-        return await _dataContext.Repairs.Where(x => x.Car.Client.ClientId == clientId).ToListAsync();
+        return await _dataContext.Repairs
+            .Where(x => x.Car.Client.ClientId == clientId)
+            .Include(x=>x.Car)
+            .ToListAsync();
     }
 }

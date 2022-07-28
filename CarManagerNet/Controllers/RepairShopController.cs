@@ -18,13 +18,13 @@ public class RepairShopController
     [HttpGet]
     public async Task<List<RepairShop>> GetRepairShops()
     {
-        return await _dataContext.RepairShops.ToListAsync();
+        return await _dataContext.RepairShops.Include(x => x.Auth).ToListAsync();
     }
     //done GetRepairShopByEmail
     [HttpGet("getRepairShopByEmail/{eMail}")]
     public RepairShop GetRepairShopByEmail(string eMail)
     {
-        return _dataContext.RepairShops.First(x => x.Auth.Email == eMail);
+        return _dataContext.RepairShops.Include(x=>x.Auth).First(x => x.Auth.Email == eMail);
     }
     //done DeleteRepairShopById
     [HttpDelete("{repairShopId:int}")]
