@@ -32,7 +32,25 @@ public class CarController
      [HttpGet("{clientId:int}")]
      public Task<List<Car>> GetCarsByClientId(int clientId)
      {
-         return _dataContext.Cars.Where(x => x.Client.ClientId == clientId).Include(x => x.Client).ToListAsync();
+         return _dataContext.Cars
+             .Where(x => x.Client.ClientId == clientId)
+             .Include(x => x.Client)
+             .Select(x=>new Car()
+             {
+                 CarId = x.CarId,
+                 Displacement = x.Displacement,
+                 MakeYear = x.MakeYear,
+                 Manufacturer = x.Manufacturer,
+                 Mileage = x.Mileage,
+                 Model = x.Model,
+                 Power = x.Power,
+                 Version = x.Version,
+                 Client = new Client()
+                 {
+                     ClientId = x.Client.ClientId //added which properties should be visible to applications that use this API.
+                 }
+             })
+             .ToListAsync();
      }
      //done updateCar
      [HttpPut]
