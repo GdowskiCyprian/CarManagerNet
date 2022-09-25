@@ -22,7 +22,7 @@ public class CarController
          await _dataContext.SaveChangesAsync();
      }
      //done deleteCar
-     //test
+     //test2
      [HttpDelete("{carId:int}")]
      public void DeleteCarById(int carId)
      {
